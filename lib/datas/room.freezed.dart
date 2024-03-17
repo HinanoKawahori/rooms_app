@@ -22,7 +22,12 @@ Room _$RoomFromJson(Map<String, dynamic> json) {
 mixin _$Room {
   String get roomId => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
-  String? get latestMessage => throw _privateConstructorUsedError;
+  String get location => throw _privateConstructorUsedError;
+  String get rent => throw _privateConstructorUsedError;
+  String get timing => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
+  String get layout => throw _privateConstructorUsedError;
+  String get depoist => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp? get latestMessageCreatedAt => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -41,7 +46,12 @@ abstract class $RoomCopyWith<$Res> {
   $Res call(
       {String roomId,
       String userId,
-      String? latestMessage,
+      String location,
+      String rent,
+      String timing,
+      String type,
+      String layout,
+      String depoist,
       @TimestampConverter() Timestamp? latestMessageCreatedAt,
       @TimestampConverter() Timestamp postedAt});
 }
@@ -61,7 +71,12 @@ class _$RoomCopyWithImpl<$Res, $Val extends Room>
   $Res call({
     Object? roomId = null,
     Object? userId = null,
-    Object? latestMessage = freezed,
+    Object? location = null,
+    Object? rent = null,
+    Object? timing = null,
+    Object? type = null,
+    Object? layout = null,
+    Object? depoist = null,
     Object? latestMessageCreatedAt = freezed,
     Object? postedAt = null,
   }) {
@@ -74,10 +89,30 @@ class _$RoomCopyWithImpl<$Res, $Val extends Room>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      latestMessage: freezed == latestMessage
-          ? _value.latestMessage
-          : latestMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      rent: null == rent
+          ? _value.rent
+          : rent // ignore: cast_nullable_to_non_nullable
+              as String,
+      timing: null == timing
+          ? _value.timing
+          : timing // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      layout: null == layout
+          ? _value.layout
+          : layout // ignore: cast_nullable_to_non_nullable
+              as String,
+      depoist: null == depoist
+          ? _value.depoist
+          : depoist // ignore: cast_nullable_to_non_nullable
+              as String,
       latestMessageCreatedAt: freezed == latestMessageCreatedAt
           ? _value.latestMessageCreatedAt
           : latestMessageCreatedAt // ignore: cast_nullable_to_non_nullable
@@ -100,7 +135,12 @@ abstract class _$$RoomImplCopyWith<$Res> implements $RoomCopyWith<$Res> {
   $Res call(
       {String roomId,
       String userId,
-      String? latestMessage,
+      String location,
+      String rent,
+      String timing,
+      String type,
+      String layout,
+      String depoist,
       @TimestampConverter() Timestamp? latestMessageCreatedAt,
       @TimestampConverter() Timestamp postedAt});
 }
@@ -117,7 +157,12 @@ class __$$RoomImplCopyWithImpl<$Res>
   $Res call({
     Object? roomId = null,
     Object? userId = null,
-    Object? latestMessage = freezed,
+    Object? location = null,
+    Object? rent = null,
+    Object? timing = null,
+    Object? type = null,
+    Object? layout = null,
+    Object? depoist = null,
     Object? latestMessageCreatedAt = freezed,
     Object? postedAt = null,
   }) {
@@ -130,10 +175,30 @@ class __$$RoomImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      latestMessage: freezed == latestMessage
-          ? _value.latestMessage
-          : latestMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      rent: null == rent
+          ? _value.rent
+          : rent // ignore: cast_nullable_to_non_nullable
+              as String,
+      timing: null == timing
+          ? _value.timing
+          : timing // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      layout: null == layout
+          ? _value.layout
+          : layout // ignore: cast_nullable_to_non_nullable
+              as String,
+      depoist: null == depoist
+          ? _value.depoist
+          : depoist // ignore: cast_nullable_to_non_nullable
+              as String,
       latestMessageCreatedAt: freezed == latestMessageCreatedAt
           ? _value.latestMessageCreatedAt
           : latestMessageCreatedAt // ignore: cast_nullable_to_non_nullable
@@ -152,7 +217,12 @@ class _$RoomImpl implements _Room {
   _$RoomImpl(
       {required this.roomId,
       required this.userId,
-      this.latestMessage,
+      required this.location,
+      required this.rent,
+      required this.timing,
+      required this.type,
+      required this.layout,
+      required this.depoist,
       @TimestampConverter() this.latestMessageCreatedAt,
       @TimestampConverter() required this.postedAt});
 
@@ -164,7 +234,17 @@ class _$RoomImpl implements _Room {
   @override
   final String userId;
   @override
-  final String? latestMessage;
+  final String location;
+  @override
+  final String rent;
+  @override
+  final String timing;
+  @override
+  final String type;
+  @override
+  final String layout;
+  @override
+  final String depoist;
   @override
   @TimestampConverter()
   final Timestamp? latestMessageCreatedAt;
@@ -174,7 +254,7 @@ class _$RoomImpl implements _Room {
 
   @override
   String toString() {
-    return 'Room(roomId: $roomId, userId: $userId, latestMessage: $latestMessage, latestMessageCreatedAt: $latestMessageCreatedAt, postedAt: $postedAt)';
+    return 'Room(roomId: $roomId, userId: $userId, location: $location, rent: $rent, timing: $timing, type: $type, layout: $layout, depoist: $depoist, latestMessageCreatedAt: $latestMessageCreatedAt, postedAt: $postedAt)';
   }
 
   @override
@@ -184,8 +264,13 @@ class _$RoomImpl implements _Room {
             other is _$RoomImpl &&
             (identical(other.roomId, roomId) || other.roomId == roomId) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.latestMessage, latestMessage) ||
-                other.latestMessage == latestMessage) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.rent, rent) || other.rent == rent) &&
+            (identical(other.timing, timing) || other.timing == timing) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.layout, layout) || other.layout == layout) &&
+            (identical(other.depoist, depoist) || other.depoist == depoist) &&
             (identical(other.latestMessageCreatedAt, latestMessageCreatedAt) ||
                 other.latestMessageCreatedAt == latestMessageCreatedAt) &&
             (identical(other.postedAt, postedAt) ||
@@ -194,8 +279,8 @@ class _$RoomImpl implements _Room {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, roomId, userId, latestMessage,
-      latestMessageCreatedAt, postedAt);
+  int get hashCode => Object.hash(runtimeType, roomId, userId, location, rent,
+      timing, type, layout, depoist, latestMessageCreatedAt, postedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -215,7 +300,12 @@ abstract class _Room implements Room {
   factory _Room(
       {required final String roomId,
       required final String userId,
-      final String? latestMessage,
+      required final String location,
+      required final String rent,
+      required final String timing,
+      required final String type,
+      required final String layout,
+      required final String depoist,
       @TimestampConverter() final Timestamp? latestMessageCreatedAt,
       @TimestampConverter() required final Timestamp postedAt}) = _$RoomImpl;
 
@@ -226,7 +316,17 @@ abstract class _Room implements Room {
   @override
   String get userId;
   @override
-  String? get latestMessage;
+  String get location;
+  @override
+  String get rent;
+  @override
+  String get timing;
+  @override
+  String get type;
+  @override
+  String get layout;
+  @override
+  String get depoist;
   @override
   @TimestampConverter()
   Timestamp? get latestMessageCreatedAt;

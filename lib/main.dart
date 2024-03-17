@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:roomie_app/home_screen.dart';
@@ -9,6 +11,10 @@ void main() async {
   );
   runApp(const MyApp());
 }
+
+//⭐️どこからでもアクセスできるfirebaseの変数⭐️
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

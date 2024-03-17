@@ -10,7 +10,12 @@ class Room with _$Room {
   factory Room({
     required String roomId,
     required String userId,
-    String? latestMessage,
+    required String location,
+    required String rent,
+    required String timing,
+    required String type,
+    required String layout,
+    required String depoist,
     @TimestampConverter() Timestamp? latestMessageCreatedAt,
     @TimestampConverter() required Timestamp postedAt,
   }) = _Room;
