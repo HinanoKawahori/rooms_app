@@ -1,7 +1,10 @@
+import 'dart:io';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:roomie_app/datas/room.dart';
 import 'package:uuid/uuid.dart';
 
@@ -21,6 +24,9 @@ class _PostRoomPartState extends State<PostRoomPart> {
     locationController.dispose();
     super.dispose();
   }
+
+  XFile? _image;
+  final imagePicker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +59,17 @@ class _PostRoomPartState extends State<PostRoomPart> {
                   locationController.clear();
                 },
                 child: const Text('部屋投稿'),
+              ),
+              // ⭐️取得した写真を表示(ない場合は画像のアイコン)⭐️
+              (_image == null)
+                  ? const Icon(Icons.photo_outlined)
+                  : Image.file(File(_image!.path)),
+              ElevatedButton(
+                onPressed: () {
+                  getImageFromGarally();
+                  // _uploadImage(imageUrl, imageFile);
+                },
+                child: const Text('画像アップロード'),
               ),
             ],
           ),
@@ -97,4 +114,54 @@ class _PostRoomPartState extends State<PostRoomPart> {
         .doc(roomId)
         .set(newRoom.toJson());
   }
+
+  //画像を表示するメソッド
+  Future<void> getImageFromGarally() async {
+    final imagePicker = ImagePicker();
+    final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = XFile(pickedFile.path);
+      }
+    });
+  }
+
+  // Future<void> _uploadImage(imageUrl, imageFile) async {
+  //   //写真の取得 写真のimagefileURLを取得
+  //   final String roomId = const Uuid().v4();
+  //   ImagePicker imagePicker = ImagePicker();
+  //   XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
+  //   String? uploadFile = file?.path;
+  //   //
+
+  //   if (file == null) return;
+  //   // String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+  //   // print(uniqueFileName);
+  //   //Get a reference to storage root
+  //   Reference referenceRoot = FirebaseStorage.instance.ref();
+  //   print(referenceRoot);
+  //   print('これはreferenceRootです');
+  //   Reference referenceDirImages = referenceRoot.child('images');
+  //   //Create a reference for the image to be stored
+  //   Reference referenceImageToUpload = referenceDirImages.child('name');
+
+  //   //Handle errors/success
+  //   try {
+  //     //Store the file
+  //     await referenceImageToUpload.putFile(File(uploadFile!));
+
+  //     //Success: get the download URL
+  //     imageUrl = await referenceImageToUpload.getDownloadURL();
+  //     imageFile = file.path;
+  //   } catch (error) {
+  //     //Some error occurred
+  //   }
+  //   if (imageUrl.isEmpty) {
+  //     ScaffoldMessenger.of(context)
+  //         .showSnackBar(SnackBar(content: Text('Please upload an image')));
+
+  //     return;
+  //   }
+  // }
 }

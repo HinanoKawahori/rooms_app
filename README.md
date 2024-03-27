@@ -4,5 +4,7 @@
 
 ## Getting Started
 
- flutter pub run build_runner build
+ 
+ 
 # rooms_app
+flutter run -d chrome --web-renderer html

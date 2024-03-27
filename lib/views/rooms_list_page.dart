@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_place/google_place.dart';
+import 'package:roomie_app/views/parts/room_tile.dart';
 import 'package:roomie_app/views/room_detail_screen.dart';
 
 class RoomListPage extends StatefulWidget {
@@ -115,9 +116,10 @@ class _RoomListPageState extends State<RoomListPage> {
                                               );
                                             },
                                             child: RoomTile(
-                                                userInfo: userInfo,
-                                                roomList: roomList,
-                                                index: index),
+                                              userInfo: userInfo,
+                                              roomList: roomList,
+                                              index: index,
+                                            ),
                                           );
                                         }
                                       },
@@ -225,71 +227,5 @@ class _RoomListPageState extends State<RoomListPage> {
     final userInfo =
         await FirebaseFirestore.instance.collection('users').doc(userId).get();
     return userInfo.data() as Map<String, dynamic>;
-  }
-}
-
-//ルームタイル
-class RoomTile extends StatelessWidget {
-  const RoomTile({
-    required this.userInfo,
-    required this.roomList,
-    required this.index,
-  });
-
-  final userInfo;
-  final roomList;
-  final index;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        color: const Color.fromARGB(255, 231, 186, 238),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //ユーザー情報
-            Row(
-              children: [
-                const CircleAvatar(),
-                Text(userInfo['userName']),
-              ],
-            ),
-
-            //TODO 部屋写真
-            const SizedBox(
-              width: 400,
-              height: 250,
-              child: Text('ここに画像が来るよ'),
-            ),
-            //部屋情報
-            Container(
-              child: Column(
-                children: [
-                  Text(
-                    roomList[index]['rent'] + '/mo',
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    roomList[index]['type'],
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    roomList[index]['timing'],
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    roomList[index]['location'],
-                    style: const TextStyle(fontSize: 15),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-          ],
-        ),
-      ),
-    );
   }
 }

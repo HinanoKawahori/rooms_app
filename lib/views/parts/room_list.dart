@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_place/google_place.dart';
 import 'package:roomie_app/datas/room.dart';
+import 'package:roomie_app/views/parts/room_tile.dart';
+import 'package:roomie_app/views/rooms_list_page.dart';
 
 class RoomList extends StatefulWidget {
   const RoomList({Key? key}) : super(key: key);
@@ -46,57 +48,8 @@ class _RoomListState extends State<RoomList> {
                     final Map<String, dynamic> userInfo = snapshot.data!;
 
                     //⭐️ユーザー情報タイル⭐️
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: const Color.fromARGB(255, 231, 186, 238),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            //TODO ユーザー情報
-                            Row(
-                              children: [
-                                const CircleAvatar(),
-                                Text(userInfo['userName']),
-                              ],
-                            ),
-
-                            //TODO 部屋写真
-                            const SizedBox(
-                              width: 400,
-                              height: 250,
-                              child: Text('ここに画像が来るよ'),
-                            ),
-
-                            //TODO　部屋情報
-
-                            Container(
-                              child: Column(
-                                children: [
-                                  Text(
-                                    roomList[index]['rent'] + '/mo',
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                  Text(
-                                    roomList[index]['type'],
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                  Text(
-                                    roomList[index]['timing'],
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                  Text(
-                                    roomList[index]['location'],
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                          ],
-                        ),
-                      ),
-                    );
+                    return RoomTile(
+                        userInfo: userInfo, roomList: roomList, index: index);
                   }
                 },
               );

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:roomie_app/views/chat_page.dart';
 import 'package:roomie_app/views/my_page.dart';
-import 'package:roomie_app/views/parts/room_list.dart';
 import 'package:roomie_app/views/rooms_list_page.dart';
+import 'package:roomie_app/views/suggestion_list_page.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -17,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   //ページのリスト
   final List pages = [
     RoomListPage(),
-    ChatPage(),
+    SuggestionListPage(),
     MyPage(),
   ];
 

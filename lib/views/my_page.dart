@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:roomie_app/datas/user_account.dart';
 import 'package:roomie_app/views/drawerpages/parts/create_user_part.dart';
-import 'package:roomie_app/views/drawerpages/parts/post_room_part.dart';
+import 'package:roomie_app/views/parts/post_room_part.dart';
+import 'package:roomie_app/views/parts/post_suggestion_part.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({
@@ -19,90 +20,51 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            throw Error();
-          } else {
-            //ログインしている場合
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          throw Error();
+        } else {
+          //ログインしている場合
 
-            if (snapshot.hasData) {
-              return Scaffold(
-                appBar: AppBar(
-                  title: const Text('マイページ'),
-                  leading: IconButton(
-                      onPressed: () async {
-                        await _logOut();
-                      },
-                      icon: const Icon(Icons.logout)),
-                ),
-                body: const Column(
+          if (snapshot.hasData) {
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('マイページ'),
+                leading: IconButton(
+                    onPressed: () async {
+                      await _logOut();
+                    },
+                    icon: const Icon(Icons.logout)),
+              ),
+              body: const SingleChildScrollView(
+                physics: ScrollPhysics(),
+                child: Column(
                   children: [
+                    PostSuggestionPart(),
                     PostRoomPart(),
                   ],
                 ),
-              );
-            } else {
-              return Scaffold(
-                appBar: AppBar(title: const Text('ようこそ')),
-                body: Column(
-                  children: [
-                    //ログイン画面
-                    loginPart(),
-                    //新規ユーザー登録
-                    const CreateUserPart(),
-                  ],
-                ),
-              );
-            }
+              ),
+            );
+          } else {
+            return Scaffold(
+              appBar: AppBar(title: const Text('ようこそ')),
+              body: Column(
+                children: [
+                  //ログイン画面
+                  loginPart(),
+                  //新規ユーザー登録
+                  const CreateUserPart(),
+                ],
+              ),
+            );
           }
-        });
-
-    // return FutureBuilder(
-    //   future: checkIfLoginOrNot(),
-    //   builder: ((context, snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return const Center(
-    //         child: CircularProgressIndicator(), // ローディングインジケーターを表示するなど
-    //       );
-    //     } else if (snapshot.hasError) {
-    //       throw Error();
-    //     } else {
-    //       //データが正常に取得されたら
-    //       String result = snapshot.data!;
-    //       return Scaffold(
-    //         appBar: AppBar(
-    //           title: const Text('マイページ'),
-    //           leading: (result == 'Login')
-    //               ? IconButton(
-    //                   onPressed: () {
-    //                     _logOut();
-    //                   },
-    //                   icon: const Icon(Icons.logout))
-    //               : Container(),
-    //         ),
-    //         body:
-    //             //TODO⭐️新規登録しているかしていないかで、内容を変える。
-    //             (result == 'Login')
-    //                 ? const Column(
-    //                     children: [
-    //                       PostRoomPart(),
-    //                     ],
-    //                   )
-    //                 : Column(
-    //                     children: [
-    //                       //ログイン画面
-    //                       loginPart(),
-    //                       //新規ユーザー登録
-    //                       const CreateUserPart(),
-    //                     ],
-    //                   ),
-    //       );
-    //     }
-    //   }),
-    // );
+        }
+      },
+    );
   }
 
 //UserIdをとる。
